@@ -1,0 +1,117 @@
+:root{
+--blue:#00b8b8;
+--black:#333;
+--white:#fff;
+--light-color:#666;
+--light-bg:#eee;
+--border:.2rem solid rgba(0,0,0,.1);
+--box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+}
+* {
+box-sizing: border-box;
+}
+
+body {
+margin: 0;
+padding: 0;
+font-family: Arial, sans-serif;
+background-color: #f5f5f5;
+}
+
+.signup-container {
+margin: 50px auto;
+max-width: 500px;
+padding: 40px;
+background-color: #fff;
+border-radius: 5px;
+box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+text-align: center;
+font-size: 36px;
+margin-bottom: 40px;
+}
+
+form {
+display: flex;
+flex-direction: column;
+}
+
+label {
+font-size: 18px;
+margin-bottom: 10px;
+}
+
+input,
+select {
+padding: 10px;
+margin-bottom: 20px;
+border: none;
+border-radius: 5px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.next_btn {
+background-color: var(--blue);
+color: #fff;
+padding: 10px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s;
+margin-top: 10px;
+display: inline-block;
+text-decoration: none;
+text-align: center;
+font-size: 15px;
+}
+
+.next_btn:hover {
+background-color: var(--light-color);
+color: white;
+}
+button[type="reset"] {
+background-color: var(--blue);
+color: #fff;
+padding: 10px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s;
+margin-top: 10px;
+}
+
+button[type="reset"]:hover {
+background-color: var(--light-color);
+}
+
+p {
+margin-top: 30px;
+font-size: 18px;
+text-align: center;
+}
+
+a {
+color: var(--blue);
+text-decoration: none;
+font-weight: bold;
+transition: color 0.3s;
+}
+
+a:hover {
+color: var(--light-color);
+}
+*::-webkit-scrollbar{
+height: .5rem;
+width: 0.5rem;
+}
+
+*::-webkit-scrollbar-track{
+background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb{
+background-color: var(--blue);
+}
+

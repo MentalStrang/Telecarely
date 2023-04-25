@@ -1,0 +1,320 @@
+:root{
+  --blue:#00b8b8;
+  --black:#333;
+  --white:#fff;
+  --light-color:#666;
+  --light-bg:#eee;
+  --border:.2rem solid rgba(0,0,0,.1);
+  --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+}
+/* CSS for the menu div */
+.menu {
+  width: 250px;
+  height: 100vh;
+  background-color: var(--blue);
+  color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* CSS for the main section */
+.main-section {
+  margin-left: 250px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+img{
+  border-radius: 50%;
+}
+
+.menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu li {
+  margin-bottom: 10px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+  transition: color 0.2s ease;
+  display: flex;
+  margin-top: 20px;
+}
+
+.menu a:hover {
+  color: var(--light-color);
+}
+
+/* Add some hover effect for the menu items */
+.menu li:hover {
+  transform: scale(1.05);
+}
+
+/* Add a background color change for the active menu item */
+.menu .active {
+  background-color: var(--light-color);
+  color: #1e1e1e;
+}
+
+/* Add a transition effect for the main section */
+.main-section {
+  transition: margin-left 0.3s ease;
+}
+
+/* Add a box shadow to the menu div for a more professional look */
+.menu {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+.logout{
+  border: 1px solid white;
+  padding: 6px ;
+  margin-top: 270px !important;
+  display: flex;
+}
+/* ****************************** */
+/* the stylr of the search form  */
+/* ****************************** */
+.main-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+.main-section a{
+  text-decoration: none;
+  color: var(--black);
+}
+.main-section span{
+  color: var(--blue);
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+h1, h3 {
+  color: #333;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 20px;
+}
+
+form {
+  margin-top: 30px;
+}
+
+input[type="search"] {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+}
+
+input[type="submit"] {
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background-color: var(--blue);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: var(--light-color);
+}
+
+.non-style-link {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.non-style-link:hover {
+  color: #0056b3;
+}
+
+* { 
+    box-sizing: border-box;
+} 
+
+
+body { 
+    margin-left: 250px; 
+    padding: 0; 
+    border-spacing: 0; 
+    font-family: 'Inter', sans-serif;
+} 
+
+:root { 
+    --primarycolor: var(--blue); 
+} 
+
+*,:after,:before { 
+    box-sizing: border-box;
+} 
+
+:-webkit-scrollbar { 
+    width: 5px;
+} 
+
+:-webkit-scrollbar-thumb { 
+    background: rgb(136, 136, 136); 
+    border-radius: 12px;
+} 
+
+:-webkit-scrollbar-thumb:hover { 
+    background: rgb(85, 85, 85);
+} 
+
+:-webkit-scrollbar-track { 
+    background: rgb(241, 241, 241);
+} 
+
+.filter-container { 
+    width:  92.5%; 
+    border:  1px solid rgb(235, 235, 235); 
+    border-radius:  8px; 
+    margin-bottom:  20px; 
+    border-spacing:  0; 
+    padding:  0;
+    animation: transitionIn-Y-bottom  0.5s;
+} 
+
+.dashboard-items { 
+    border: 2px solid rgba(201, 203, 206, 0.624); 
+    border-radius: 7px; 
+    color: var(--primarycolor);
+} 
+
+.btn-icon-back { 
+    background-image: url('http://localhost/TestProjects/edoc-main/edoc-main/img/icons/back-ice#89a147.svg'); 
+    background-position: 18px 50%; 
+    background-repeat: no-repeat; 
+    transition: 0.5s; 
+    padding: 8px 20px 8px 40px; 
+    background-repeat-x: no-repeat; 
+    background-repeat-y: no-repeat;
+} 
+
+.dashboard-icons { 
+    background-color: rgba(184, 184, 184, 0.247); 
+    padding-top: 30px; 
+    padding-bottom: 30px; 
+    border-radius: 7px; 
+    margin-left: 40px; 
+    margin-right: 0px;
+} 
+
+
+.h1-dashboard { 
+    margin: 0; 
+    padding: 0; 
+    font-size: 25px; 
+    font-weight: 600; 
+    line-height: 0; 
+    padding-top: 20px;
+} 
+
+.h3-dashboard { 
+    margin: 0; 
+    padding: 0; 
+    font-size: 20px; 
+    font-weight: 500; 
+    color: rgba(33, 37, 41, 0.89);
+} 
+
+
+@keyframes transitionIn-Y-bottom { 
+  0% {  
+      opacity: 0; 
+      transform: translateY(30px); 
+      opacity: 0; 
+      transform: translateY(30px); 
+  }  
+  100% {  
+      opacity: 1; 
+      transform: translateY(0); 
+      opacity: 1; 
+      transform: translateY(0px); 
+  }  
+
+} 
+
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.dashboard-filter {
+  margin-bottom: 20px;
+}
+
+.dashboard-filter-label {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.dashboard-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.dashboard-item {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  padding: 20px;
+  width: 250px;
+  height: 150px;
+  transition: all 0.3s ease;
+}
+
+.dashboard-item:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+.dashboard-item-number {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.dashboard-item-label {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+

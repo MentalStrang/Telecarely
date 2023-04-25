@@ -52,7 +52,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
-  button[type="submit"] {
+  .next_btn {
     background-color: var(--blue);
     color: #fff;
     padding: 10px;
@@ -60,9 +60,29 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 10px;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    font-size: 15px;
   }
   
-  button[type="submit"]:hover {
+  .next_btn:hover {
+    background-color: var(--light-color);
+    color: white;
+  }
+  button[type="reset"] {
+    background-color: var(--blue);
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+  }
+  
+  button[type="reset"]:hover {
     background-color: var(--light-color);
   }
   
