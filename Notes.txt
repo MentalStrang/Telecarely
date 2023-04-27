@@ -1,0 +1,6 @@
+1- prescaption page 
+2- all doctors page 
+3- all patient page
+'note that somthing 'll add to database be carefal
+ something like sessions for the patient'
+4-
