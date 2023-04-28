@@ -1,3 +1,11 @@
+<?php
+require __DIR__. "/../database/connection_all_patient.php";
+$last_patient = database_get_last_patient();
+$patients = database_get_all_patients();
+$last_doctor = database_get_last_doctor();
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,11 +16,11 @@
     <div class="menu">
         <div class="doctor-profile">
             <img src="../images/pic-1.png" alt="Doctor Image">
-            <h2>Mohamed Ramadan</h2>
+            <h2><?php echo $patients['name']?></h2>
         </div>
         <ul>
             <li><a href="#">Home</a></li>
-            <li><a href="../all_doctors.html">All Doctors</a></li>
+            <li><a href="all_doctors.php">All Doctors</a></li>
             <li><a href="../prescription/pre_index.html">Your Prescriptions</a></li>
             <li><a href="../index.html" class="logout">Log Out</a></li>
         </ul>
@@ -21,17 +29,7 @@
 		<h1>Welcome to <a href="../index.html" class="logo">TELE<span>Carely.</span></a>
 		<div class="center-container">
 			<h3>Welcome!</h3>
-			<h1>Mohamed Ramadan.</h1>
-			<!-- <p>Haven't any idea about doctors? no problem let's jumping to 
-				<b>"All Doctors"</b>
-			section or 
-			<a href="schedule.php" class="non-style-link">
-				<b>"Sessions"</b>
-			</a>
-				<br>Track your past and future appointments history.
-				<br>Also find out the expected arrival time of your doctor or medical consultant.
-				<br><br>
-			</p> -->
+			<h1><?php echo $patients['name']?></h1>
 			<h3>Channel a Doctor Here</h3>
 			<form class="search-form">
 				<input type="search" name="search" class="input-text" placeholder="Search Doctor and We will Find The Session Available">
@@ -48,26 +46,22 @@
 			<p class="dashboard-filter-label">Status</p>
 			</div>
 			<div class="dashboard-items">
-			<div class="dashboard-item">
-				<div class="dashboard-item-number">1</div>
-				<div class="dashboard-item-label">All Doctors</div>
-				<div class="dashboard-item-icon"></div>
-			</div>
-			<div class="dashboard-item">
-				<div class="dashboard-item-number">3</div>
-				<div class="dashboard-item-label">All Patients</div>
-				<div class="dashboard-item-icon"></div>
-			</div>
-			<div class="dashboard-item">
-				<div class="dashboard-item-number">0</div>
-				<div class="dashboard-item-label">All Nurse</div>
-				<div class="dashboard-item-icon"></div>
-			</div>
-			<div class="dashboard-item">
-				<div class="dashboard-item-number">0</div>
-				<div class="dashboard-item-label">Today Sessions</div>
-				<div class="dashboard-item-icon"></div>
-			</div>
+				<div class="dashboard-item">
+					<div class="dashboard-item-number"><?php  echo $last_doctor['doctor_id'] ?></div>
+					<div class="dashboard-item-label">All Doctors</div>
+				</div>
+				<div class="dashboard-item">
+					<div class="dashboard-item-number"><?php echo $last_patient['patient_id']; ?></div>
+					<div class="dashboard-item-label">All Patients</div>
+				</div>
+				<div class="dashboard-item">
+					<div class="dashboard-item-number">0</div>
+					<div class="dashboard-item-label">All Nurse</div>
+				</div>
+				<div class="dashboard-item">
+					<div class="dashboard-item-number">0</div>
+					<div class="dashboard-item-label">Today Sessions</div>
+				</div>
 			</div>
 		</div>
 	    <!-- ********************************* -->

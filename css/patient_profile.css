@@ -111,11 +111,6 @@ h1, h3 {
   color: #333;
 }
 
-p {
-  font-size: 16px;
-  line-height: 1.5;
-  margin-top: 20px;
-}
 
 form {
   margin-top: 30px;
@@ -193,59 +188,11 @@ body {
     background: rgb(241, 241, 241);
 } 
 
-.filter-container { 
-    width:  92.5%; 
-    border:  1px solid rgb(235, 235, 235); 
-    border-radius:  8px; 
-    margin-bottom:  20px; 
-    border-spacing:  0; 
-    padding:  0;
-    animation: transitionIn-Y-bottom  0.5s;
-} 
-
 .dashboard-items { 
     border: 2px solid rgba(201, 203, 206, 0.624); 
     border-radius: 7px; 
     color: var(--primarycolor);
 } 
-
-.btn-icon-back { 
-    background-image: url('http://localhost/TestProjects/edoc-main/edoc-main/img/icons/back-ice#89a147.svg'); 
-    background-position: 18px 50%; 
-    background-repeat: no-repeat; 
-    transition: 0.5s; 
-    padding: 8px 20px 8px 40px; 
-    background-repeat-x: no-repeat; 
-    background-repeat-y: no-repeat;
-} 
-
-.dashboard-icons { 
-    background-color: rgba(184, 184, 184, 0.247); 
-    padding-top: 30px; 
-    padding-bottom: 30px; 
-    border-radius: 7px; 
-    margin-left: 40px; 
-    margin-right: 0px;
-} 
-
-
-.h1-dashboard { 
-    margin: 0; 
-    padding: 0; 
-    font-size: 25px; 
-    font-weight: 600; 
-    line-height: 0; 
-    padding-top: 20px;
-} 
-
-.h3-dashboard { 
-    margin: 0; 
-    padding: 0; 
-    font-size: 20px; 
-    font-weight: 500; 
-    color: rgba(33, 37, 41, 0.89);
-} 
-
 
 @keyframes transitionIn-Y-bottom { 
   0% {  
