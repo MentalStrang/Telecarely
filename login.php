@@ -2,11 +2,9 @@
 require __DIR__ . "/connection.php";
 $connection = database_connection();
 
-$user_email = $_POST['email'];
-$user_password = $_POST['password'];
 
 // Check if email/password is empty or null
-if (empty($user_email) || empty($user_password)) {
+if (empty($_POST['email']) || empty($_POST['password'])) {
 	exit('Please fill email and password.');
 }
 
@@ -22,7 +20,7 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 // Check if user exists in DB or not
 if ($stmt = $con->prepare('SELECT `password` FROM `users` WHERE `email` = ?')) {
 	// Pass username to the query
-	$stmt->bind_param('s', $user_email);
+	$stmt->bind_param('s', $_POST['email']);
 	$stmt->execute();
 	$stmt->store_result();
 	// Check if the query returned any rows
