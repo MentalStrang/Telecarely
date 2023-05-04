@@ -31,6 +31,7 @@
     text-align: center;
     font-size: 36px;
     margin-bottom: 40px;
+    color: var(--blue);
   }
   
   form {
@@ -83,6 +84,20 @@
   }
   
   button[type="reset"]:hover {
+    background-color: var(--light-color);
+  }
+  button[type="submit"] {
+    background-color: var(--blue);
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+  }
+  
+  button[type="submit"]:hover {
     background-color: var(--light-color);
   }
   

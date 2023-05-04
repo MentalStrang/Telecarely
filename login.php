@@ -1,11 +1,59 @@
 <?php
-require __DIR__ . "/connection.php";
+// variables used 
+$error = "";
+
+require __DIR__ . "/database/connection.php";
 $connection = database_connection();
+if (isset($_POST["submit"])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
+    // if ($query = $connection->query("SELECT `password` FROM `users` WHERE `email` = '$email' ")) {
+    //     if ($query->num_rows > 0) {
+    //         $result = $query->fetch_array();
+    //         if (password_verify($password, $result[0])) {
+    //             echo "password is correct";
+    //         } else {
+    //             $error = "Invalid Email or Password";
+    //         }
+    //     }
+    // }
 
-// Check if email/password is empty or null
-if (empty($_POST['email']) || empty($_POST['password'])) {
-	exit('Please fill email and password.');
+    // start sessions
+
+    if ($stmt = $connection->prepare('SELECT `id`, `password` FROM `users` WHERE `email` = ?')) {
+        // Pass email to the query
+        $stmt->bind_param('s', $_POST['email']);
+        $stmt->execute();
+        $stmt->store_result();
+        // Check if the query returned any rows
+        if ($stmt->num_rows > 0) {
+            // Bind the password returned from the database to the $hashed_password variable
+            $stmt->bind_result($user_id, $hashed_password);
+            $stmt->fetch();
+            // Verify the password entered by the user matches the hashed password from the database
+            if (password_verify($_POST['password'], $hashed_password)) {
+                // Password is correct, set session variables and redirect the user to the dashboard
+                session_start();
+                $_SESSION['user_id'] = $user_id;
+                header('Location: index.html');
+                exit();
+            } else {
+                // Password is incorrect
+                $error = 'The password you have entered is incorrect.';
+            }
+        } else {
+            // User does not exist in the database
+            $error = 'The email address you have entered does not exist in our records';
+        }
+        $stmt->close();
+    }
+    // Check if the email/password is empty or null
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (empty($_POST['email']) || empty($_POST['password'])) {
+            exit('Please fill in both email and password fields.');
+        }
+    }
 }
 
 /*
@@ -13,51 +61,48 @@ if (empty($_POST['email']) || empty($_POST['password'])) {
 * eg. hellothere is not a valid email
 * eg. hellothere@gmail.com is a valid one
 */
-if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-	exit('The email address you have entered is invalid. Please enter a valid email address and try again.');
-}
+// if ($_SERVER['REQUEST_METHOD'] == "POST") {
+//     if (filter_var($_POST["email"])) {
+//         $RequiredMail = "De email dient ingevult te worden";
+//     } else {
+//         exit('The email address you have entered is invalid. Please enter a valid email address and try again.');
+//     }
+// }
 
-// Check if user exists in DB or not
-if ($stmt = $con->prepare('SELECT `password` FROM `users` WHERE `email` = ?')) {
-	// Pass username to the query
-	$stmt->bind_param('s', $_POST['email']);
-	$stmt->execute();
-	$stmt->store_result();
-	// Check if the query returned any rows
-	if ($stmt->num_rows > 0) {
-		echo 'Username exists, please choose another!';
-	} else {
-		echo 'The provided username and/or password is invalid. Please revise your credentials and try again.';
-	}
-	$stmt->close();
-} else {
-	echo 'We apologize for the inconvenience, but we were unable to prepare your statement at this time. Please try again later.';
-}
+
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-	<title>Login Page</title>
-	<link rel="stylesheet" href="css/login.css" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="css/login.css" />
 </head>
 
 <body>
-	<div class="login-container">
-		<h1>Login</h1>
-		<form>
-			<label for="username">Username</label>
-			<input type="text" id="username" name="username" required />
+    <div class="login-container">
+        <h1>Login</h1>
+        <form method="post" action="login.php">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" required />
 
-			<label for="password">Password</label>
-			<input type="password" id="password" name="password" required />
-
-			<button type="submit">Login</button>
-		</form>
-		<p>Don't have an account? <a href="signup.html">Sign up</a></p>
-	</div>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required />
+            <? if ($error = "") : ?>
+                <p style="color: red; margin-top:-12px"> <?= $error ?> </p>
+            <? endif; ?>
+            <button type="submit" name="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="signup.php">Sign up</a></p>
+    </div>
 
 </body>
 
 </html>
+<script>
+    // Prevent resubmission the from everytime
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
