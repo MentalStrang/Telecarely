@@ -10,6 +10,22 @@ function database_get_count_patient()
 	return $last_patient;
 }
 
+
+function search_doctors ($search_for)
+{
+	$connection = database_connection();
+	$stmt = mysqli_prepare($connection, "select * from users where name like ? 
+	and role like 'doctor'");
+	mysqli_stmt_bind_param($stmt, 's', $search_for);
+	mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+	$doctors = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_stmt_close($stmt);
+    mysqli_close($connection);
+    return $doctors;
+}
+
+
 function database_get_all_patients()
 {
 	$connection = database_connection();

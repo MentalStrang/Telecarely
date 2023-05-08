@@ -3,14 +3,15 @@ require __DIR__ . "/../database/connection_users.php";
 $last_patient = database_get_count_patient();
 $patients = database_get_all_patients();
 $last_doctor = database_get_count_doctor();
-// @session_start();
-// $patientUID = $_SESSION['patient_uid'];
 
-// // Replace the query 
-// $stmt = $conn->prepare("SELECT * FROM inpatient ORDER BY id DESC");
-// $stmt->execute();
-// // with this
-// $stmt = $conn->query("SELECT * FROM inpatient WHERE patientId = '$patientUID' ");
+$search_for ='';
+if (isset($_GET['search_for']))
+{
+	$search_for = $_GET['search_for'];
+	$doctors = search_doctors($search_for);
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -43,10 +44,15 @@ $last_doctor = database_get_count_doctor();
 						<?php echo $patient['name']; ?>
 					</h1> <?php endforeach ?>
 				<h3>Channel a Doctor Here</h3>
-				<form class="search-form">
-					<input type="search" name="search" class="input-text" placeholder="Search Doctor and We will Find The Session Available">
+				<form class="search-form" action="patient_Index.php" method="get">
+					<input type="search" name="search_for" class="input-text" placeholder="Search Doctor and We will Find The Session Available">
 					<input type="Submit" value="Search" class="btn-primary btn">
 				</form>
+				<table>
+					<?php foreach ($doctors as $doctor):?>
+					<tr><?= $doctor['name']?></tr>
+					<?php endforeach?>
+				</table>
 			</div>
 	</div>
 
