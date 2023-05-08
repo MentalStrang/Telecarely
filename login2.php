@@ -29,7 +29,7 @@ if ($stmt = $connection->prepare('SELECT `id`, `password` FROM `users` WHERE `em
 			// Password is correct, set session variables and redirect the user to the dashboard
 			session_start();
 			$_SESSION['user_id'] = $user_id;
-			header('Location: dashboard.php');
+			header('Location: patient/patient_Index.php');
 			exit();
 		} else {
 			// Password is incorrect

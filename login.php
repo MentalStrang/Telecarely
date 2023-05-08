@@ -36,8 +36,11 @@ if (isset($_POST["submit"])) {
                 // Password is correct, set session variables and redirect the user to the dashboard
                 session_start();
                 $_SESSION['user_id'] = $user_id;
-                header('Location: index.html');
+                header('Location: patient/patient_Index.php');
                 exit();
+                $_SESSION['login'];
+                $_SESSION['login'] = true;
+                $_SESSION['patient_uid'] = $patientId;
             } else {
                 // Password is incorrect
                 $error = 'The password you have entered is incorrect.';

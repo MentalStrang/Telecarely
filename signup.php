@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . "/database/connection.php";
-require __DIR__ . "/database/connection_all_patient.php";
+require __DIR__ . "/database/connection_users.php";
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
