@@ -18,15 +18,15 @@ function database_get_all_patients()
 	return $patients;
 }
 
-function database_get_last_doctor()
+
+function database_get_count_doctor()
 {
 	$connection = database_connection();
-	$query = "SELECT id FROM users WHERE `role` = 'doctor'";
-	$result = mysqli_query($connection, $query);
-	$last_doctor = mysqli_fetch_assoc($result);
+	$quiery = "SELECT COUNT(*) AS num_doctors FROM users WHERE role = 'doctor'";
+	$resutl = mysqli_query($connection, $quiery);
+	$last_doctor = mysqli_fetch_assoc($resutl);
 	return $last_doctor;
 }
-
 
 function database_register_user($name, $email, $password, $user_role, $age, $phone, $profile_pic, $specialty)
 {

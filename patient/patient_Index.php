@@ -2,7 +2,7 @@
 require __DIR__ . "/../database/connection_users.php";
 $last_patient = database_get_count_patient();
 $patients = database_get_all_patients();
-$last_doctor = database_get_last_doctor();
+$last_doctor = database_get_count_doctor();
 // @session_start();
 // $patientUID = $_SESSION['patient_uid'];
 
@@ -59,7 +59,7 @@ $last_doctor = database_get_last_doctor();
 		</div>
 		<div class="dashboard-items">
 			<div class="dashboard-item">
-				<div class="dashboard-item-number"><?php echo $last_doctor['id'] ?></div>
+				<div class="dashboard-item-number"><?php echo $last_doctor['num_doctors'] ?></div>
 				<div class="dashboard-item-label">All Doctors</div>
 			</div>
 			<div class="dashboard-item">
