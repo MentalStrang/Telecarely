@@ -2,52 +2,48 @@
 // variables used 
 $error = "";
 
+// required pages
 require __DIR__ . "/database/connection.php";
+require_once __DIR__ . "/database/connection_users.php";
+
+
+session_start();
+// to prevent user to back to the login page if he is login
+if (isset($_SESSION['user_id'])) {
+    header('location: patient/patient_index.php');
+    exit();
+}
+
 $connection = database_connection();
 if (isset($_POST["submit"])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // if ($query = $connection->query("SELECT `password` FROM `users` WHERE `email` = '$email' ")) {
-    //     if ($query->num_rows > 0) {
-    //         $result = $query->fetch_array();
-    //         if (password_verify($password, $result[0])) {
-    //             echo "password is correct";
-    //         } else {
-    //             $error = "Invalid Email or Password";
-    //         }
-    //     }
-    // }
-
-    // start sessions
 
     if ($stmt = $connection->prepare('SELECT `id`, `password` FROM `users` WHERE `email` = ?')) {
         // Pass email to the query
-        $stmt->bind_param('s', $_POST['email']);
+        $stmt->bind_param('s', $email);
         $stmt->execute();
         $stmt->store_result();
         // Check if the query returned any rows
         if ($stmt->num_rows > 0) {
             // Bind the password returned from the database to the $hashed_password variable
-            $stmt->bind_result($user_id, $hashed_password);
+            $stmt->bind_result($id, $hashed_password);
             $stmt->fetch();
             // Verify the password entered by the user matches the hashed password from the database
-            if (password_verify($_POST['password'], $hashed_password)) {
+            if (password_verify($password, $hashed_password)) {
                 // Password is correct, set session variables and redirect the user to the dashboard
-                session_start();
-                $_SESSION['user_id'] = $user_id;
+                $_SESSION['user_id'] = $id;
+                // Redirect the user to the dashboard
                 header('Location: patient/patient_Index.php');
                 exit();
-                $_SESSION['login'];
-                $_SESSION['login'] = true;
-                $_SESSION['patient_uid'] = $patientId;
             } else {
                 // Password is incorrect
-                $error = 'The password you have entered is incorrect.';
+                $error_password = 'The password you have entered is incorrect.';
             }
         } else {
             // User does not exist in the database
-            $error = 'The email address you have entered does not exist in our records';
+            $error_email = 'The email address you have entered does not exist in our records.';
         }
         $stmt->close();
     }

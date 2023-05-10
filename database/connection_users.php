@@ -1,6 +1,8 @@
 <?php
+// variables 
+#
 require_once __DIR__ . "/connection.php";
-
+// get the coutn of patient in whole clinic
 function database_get_count_patient()
 {
 	$connection = database_connection();
@@ -9,32 +11,7 @@ function database_get_count_patient()
 	$last_patient = mysqli_fetch_assoc($result);
 	return $last_patient;
 }
-
-
-function search_doctors ($search_for)
-{
-	$connection = database_connection();
-	$stmt = mysqli_prepare($connection, "select * from users where name like ? 
-	and role like 'doctor'");
-	mysqli_stmt_bind_param($stmt, 's', $search_for);
-	mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-	$doctors = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_stmt_close($stmt);
-    mysqli_close($connection);
-    return $doctors;
-}
-
-
-function database_get_all_patients()
-{
-	$connection = database_connection();
-	$result = mysqli_query($connection, "SELECT SUM(`id`) FROM users WHERE `role` = 'patient'");
-	$patients = mysqli_fetch_all($result, MYSQLI_ASSOC);
-	return $patients;
-}
-
-
+// get the count of doctors 
 function database_get_count_doctor()
 {
 	$connection = database_connection();
@@ -44,6 +21,36 @@ function database_get_count_doctor()
 	return $last_doctor;
 }
 
+function search_doctors($search_for)
+{
+	$connection = database_connection();
+	$stmt = mysqli_prepare($connection, "select * from users where name like ? 
+	and role like 'doctor'");
+	mysqli_stmt_bind_param($stmt, 's', $search_for);
+	mysqli_stmt_execute($stmt);
+	$result = mysqli_stmt_get_result($stmt);
+	$doctors = mysqli_fetch_all($result, MYSQLI_ASSOC);
+	mysqli_stmt_close($stmt);
+	mysqli_close($connection);
+	return $doctors;
+}
+
+// get users
+
+function database_get_all_user($id)
+{
+	$connection = database_connection();
+	$stmt = mysqli_prepare($connection, "SELECT * FROM users WHERE `id` = ?");
+	mysqli_stmt_bind_param($stmt, "i", $id);
+	mysqli_stmt_execute($stmt);
+	$result = mysqli_stmt_get_result($stmt);
+	$patients = mysqli_fetch_all($result, MYSQLI_ASSOC);
+	return $patients;
+}
+
+
+
+// registeratin and checks
 function database_register_user($name, $email, $password, $user_role, $age, $phone, $profile_pic, $specialty)
 {
 	$connection = database_connection();
@@ -52,21 +59,18 @@ function database_register_user($name, $email, $password, $user_role, $age, $pho
 	// Check if all supplied items are empty or null
 	if (
 		empty($name) ||
-		empty($email) ||
 		empty($password) ||
-		empty($user_role) ||
 		empty($age) ||
-		empty($phone) ||
 		empty($profile_pic)
 	) {
 		return 'Please complete the registration form.';
 	}
 
 	/*
-    *   Check if email is valid or not.
-    *   eg. hellothere is not a valid email
-    *   eg. hellothere@gmail.com is a valid one
-    */
+		*   Check if email is valid or not.
+		*   eg. hellothere is not a valid email
+		*   eg. hellothere@gmail.com is a valid one
+		*/
 	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 		return 'The email address you have entered is invalid. Please enter a valid email address and try again.';
 	}
@@ -88,10 +92,10 @@ function database_register_user($name, $email, $password, $user_role, $age, $pho
 	}
 
 	/*
-    *   Check if user exists in DB or not
-    *   We use prepared statement to have all input automatically escaped
-    */
-	if ($stmt = $connection->prepare('SELECT `name` FROM `users` WHERE `email` = ?')) {
+		*   Check if user exists in DB or not
+		*   We use prepared statement to have all input automatically escaped
+		*/
+	if ($stmt = $connection->prepare('SELECT name FROM users WHERE email = ?')) {
 		$stmt->bind_param('s', $email);
 		$stmt->execute();
 		$stmt->store_result();
@@ -102,11 +106,11 @@ function database_register_user($name, $email, $password, $user_role, $age, $pho
 		} else {
 			$stmt->close();
 			// Insert the email/password into the database
-			if ($stmt = $connection->prepare('INSERT INTO users (`name`, `email`, `password`, `role`, `age`, `phone`, `image`, `specialty`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')) {
+			if ($stmt = $connection->prepare('INSERT INTO users (name, email, password, role, age, phone, image, specialty) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')) {
 				// Apply a hash function to the passwords so that in the event of a data breach, the passwords are not exposed in plain text.
 				$password = password_hash($password, PASSWORD_DEFAULT);
 				$stmt->bind_param(
-					'sssssiib',
+					'ssssiiis',
 					$name,
 					$email,
 					$password,

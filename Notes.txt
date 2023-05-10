@@ -4,3 +4,13 @@
 'note that somthing 'll add to database be carefal
  something like sessions for the patient'
 4-
+
+
+
+
+
+
+
+thing not frogtten 
+1- style the logout button 
+2- 

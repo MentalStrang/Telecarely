@@ -2,12 +2,23 @@
 require __DIR__ . "/database/connection.php";
 require __DIR__ . "/database/connection_users.php";
 
+
+session_start();
+// to prevent user to back to the signup page if he is login
+if (isset($_SESSION['user_id'])) {
+	header('location: patient/patient_index.php');
+	exit();
+}
+
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+$error = ''; // Initialize error variable with an empty string
+$result = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	$result = database_register_user(
+	$error = database_register_user(
 		$_POST['name'],
 		$_POST['email'],
 		$_POST['password'],
@@ -17,13 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$_POST['profile_pic'],
 		$_POST['specialty']
 	);
-	// rederict after succeful signup 
-	echo $result;
-	header('Location: http://localhost/telecarely/');
-
-	exit;
+	if ($error === '') {
+		// redirect after successful signup
+		header('Location: login.php');
+		exit;
+	}
 }
-
 
 ?>
 
@@ -71,7 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 			<label for="profile_pic">Profile Picture</label>
 			<input type="file" id="profile_pic" name="profile_pic" accept="image/*" required>
-
+			<?php if ($error !== "") : ?>
+				<p style="color: red; margin-top:-12px"> <?= $error ?> </p>
+			<?php endif; ?>
 			<button type="submit" name="signup">Sign Up</button>
 			<button type="reset">Reset</button>
 
@@ -81,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 
 </html>
+
 
 <script>
 	let select = document.querySelector('#user-role');
@@ -101,4 +114,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	}
 	user_role_change()
 	select.addEventListener("change", user_role_change);
+
+	// Prevent resubmission the from everytime
+	if (window.history.replaceState) {
+		window.history.replaceState(null, null, window.location.href);
+	}
 </script>

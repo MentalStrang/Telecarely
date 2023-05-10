@@ -1,12 +1,16 @@
 <?php
-require __DIR__ . "/../database/connection_all_doctors.php"; 
-$doctors = database_get_all_doctors(); 
+require __DIR__ . "/../database/connection_all_doctors.php";
+$doctors = database_get_doctors();
+$doctors_id = database_get_doctors_id();
+// print_r($doctors);
+// exit();
 
 ?>
 
 
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,19 +18,20 @@ $doctors = database_get_all_doctors();
 	<link rel="stylesheet" type="text/css" href="../css/all_doctor.css">
 	<link rel="stylesheet" type="text/css" href="../css/patient_profile.css">
 </head>
+
 <body>
-    <div class="menu">
-        <div class="doctor-profile">
-            <img src="../images/pic-1.png" alt="Doctor Image">
-            <h2>Mohamed Ramadan</h2>
-        </div>
-        <ul>
-            <li><a href="patient_index.php">Home</a></li>
-            <li><a href="all_doctors.php">All Doctors</a></li>
-            <li><a href="../prescription/pre_index.html">Your Prescriptions</a></li>
-            <li><a href="../index.html" class="logout">Log Out</a></li>
-        </ul>
-    </div>
+	<div class="menu">
+		<div class="doctor-profile">
+			<img src="../images/pic-1.png" alt="Doctor Image">
+			<h2>Mohamed Ramadan</h2>
+		</div>
+		<ul>
+			<li><a href="patient_index.php">Home</a></li>
+			<li><a href="all_doctors.php">All Doctors</a></li>
+			<li><a href="../prescription/pre_index.html">Your Prescriptions</a></li>
+			<li><a href="../logout.php">logout</a></li>
+		</ul>
+	</div>
 	<h1>Doctor Information</h1>
 	<table>
 		<thead>
@@ -38,15 +43,23 @@ $doctors = database_get_all_doctors();
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach($doctors as $doctor): ?>
+			<?php foreach ($doctors as $doctor) : ?>
 				<a href="cardiology.html">
 					<tr>
 						<td><?php echo $doctor['name'] ?></td>
-						<td><?php echo $doctor['Specialization'] ?></td>
+						<td><?php echo $doctor['specialty'] ?></td>
 						<td>Email: <?php echo $doctor['email'] ?><br>Phone: <?php echo $doctor['phone'] ?></td>
 
 						<!--"note here" i made here a new button to access the patient to send the inquiry for the doctor but note that the update of css not reflect here in php code and i don't know where the error -->
-						<td><button class="inquiry" style="width:200px; "><a style="text-decoration:none; color:white" href="../prescription/inquiry.php?id=<?php echo $doctor['doctor_id']?>" >Send Now</a></button></td>
+						<td>
+							<?php foreach ($doctors_id as $id) : ?>
+								<button class="inquiry" style="width:200px;">
+									<a style="text-decoration:none; color:white" href="../inquiry.php?id=<?php echo $id['id']; ?>">
+										Send Now
+									</a>
+								</button>
+							<?php endforeach; ?>
+						</td>
 
 					</tr>
 				</a>
@@ -54,4 +67,5 @@ $doctors = database_get_all_doctors();
 		</tbody>
 	</table>
 </body>
+
 </html>
