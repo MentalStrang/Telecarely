@@ -1,10 +1,10 @@
 <?php
-session_start();
-// to prevent user to back to the login page if he is login
-if (isset($_SESSION['user_id'])) {
-    header('location: patient/patient_index.php');
-    exit();
-}
+// session_start();
+// // to prevent user to back to the login page if he is login
+// if (isset($_SESSION['user_id'])) {
+//     header('location: patient/patient_index.php');
+//     exit();
+// }
 
 ?>
 

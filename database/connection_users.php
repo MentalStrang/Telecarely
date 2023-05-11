@@ -1,7 +1,6 @@
 <?php
-// variables 
-#
 require_once __DIR__ . "/connection.php";
+
 // get the coutn of patient in whole clinic
 function database_get_count_patient()
 {
@@ -11,6 +10,7 @@ function database_get_count_patient()
 	$last_patient = mysqli_fetch_assoc($result);
 	return $last_patient;
 }
+
 // get the count of doctors 
 function database_get_count_doctor()
 {
@@ -36,7 +36,6 @@ function search_doctors($search_for)
 }
 
 // get users
-
 function database_get_all_user($id)
 {
 	$connection = database_connection();
@@ -47,8 +46,6 @@ function database_get_all_user($id)
 	$patients = mysqli_fetch_all($result, MYSQLI_ASSOC);
 	return $patients;
 }
-
-
 
 // registeratin and checks
 function database_register_user($name, $email, $password, $user_role, $age, $phone, $profile_pic, $specialty)
@@ -131,15 +128,3 @@ function database_register_user($name, $email, $password, $user_role, $age, $pho
 		}
 	}
 }
-
-
-// this function to login the user
-
-// function database_login_user($email, $password){
-
-// 	$hashed_password = password_hash($password,PASSWORD_DEFAULT); 
-// 	$conn = database_connection();
-// 	$quiery = "SELECT * from users WHERE email= ?" ;
-// 	$stmt = mysqli_prepare($conn, $quiery); 
-// 	mysqli_stmt_bind_param($stmt, 's', $)
-// }

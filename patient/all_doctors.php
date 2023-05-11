@@ -1,7 +1,15 @@
 <?php
+session_start();
 require __DIR__ . "/../database/connection_all_doctors.php";
+require __DIR__ . "/../database/connection_users.php";
 $doctors = database_get_doctors();
-$doctors_id = database_get_doctors_id();
+if (isset($_SESSION['user_id'])) {
+	$user_id = $_SESSION['user_id'];
+	$patients = database_get_all_user($user_id);
+} else {
+	// redirect to the login page if user made logout
+	header('location: ../login.php');
+}
 // print_r($doctors);
 // exit();
 
@@ -23,7 +31,10 @@ $doctors_id = database_get_doctors_id();
 	<div class="menu">
 		<div class="doctor-profile">
 			<img src="../images/pic-1.png" alt="Doctor Image">
-			<h2>Mohamed Ramadan</h2>
+			<h2><?php foreach ($patients as $patient) : ?>
+					<h2><?= $patient['name'] ?></h2>
+				<?php endforeach; ?>
+			</h2>
 		</div>
 		<ul>
 			<li><a href="patient_index.php">Home</a></li>
@@ -52,13 +63,11 @@ $doctors_id = database_get_doctors_id();
 
 						<!--"note here" i made here a new button to access the patient to send the inquiry for the doctor but note that the update of css not reflect here in php code and i don't know where the error -->
 						<td>
-							<?php foreach ($doctors_id as $id) : ?>
-								<button class="inquiry" style="width:200px;">
-									<a style="text-decoration:none; color:white" href="../inquiry.php?id=<?php echo $id['id']; ?>">
-										Send Now
-									</a>
-								</button>
-							<?php endforeach; ?>
+							<button class="inquiry" style="width:200px;">
+								<a style="text-decoration:none; color:white" href="../inquiry.php?id=<?php echo $doctor['id']; ?>">
+									Send Now
+								</a>
+							</button>
 						</td>
 
 					</tr>

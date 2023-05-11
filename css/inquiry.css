@@ -55,7 +55,16 @@ form textarea:focus {
 	outline: none;
 	box-shadow: 0 0 5px rgba(0,0,0,0.3);
 }
-
+form input[type=number]{
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0 0 5px rgba(0,0,0,0.1);
+	width: 100%;
+	resize: none;
+	font-size: 16px;
+	margin-bottom: 20px;
+}
 form input[type=submit] {
 	background-color: var(--blue);
 	color: #fff;

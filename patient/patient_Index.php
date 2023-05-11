@@ -46,7 +46,7 @@ if (isset($_GET['search_for'])) {
 		<ul>
 			<li><a href="#">Home</a></li>
 			<li><a href="all_doctors.php">All Doctors</a></li>
-			<li><a href="../prescription/pre_index.html">Your Prescriptions</a></li>
+			<li><a href="pre_index.php">Your Prescriptions</a></li>
 			<li><a href="../logout.php">logout</a></li>
 
 		</ul>
