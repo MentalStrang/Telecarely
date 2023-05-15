@@ -3,7 +3,7 @@
 require __DIR__ . "/../database/connection_users.php";
 $last_patient = database_get_count_patient();
 $last_doctor = database_get_count_doctor();
-
+$last_nurse = database_get_count_nurse();
 session_start();
 // this code for sessions
 
@@ -16,14 +16,13 @@ if (isset($_SESSION['user_id'])) {
 }
 
 
-
-// for search tag " search fo a doctor in the clinic using name
-$search_for = '';
-if (isset($_GET['search_for'])) {
+// for search tag " search for a doctor in the clinic using name
+// $search_for = '';
+$doctors = array();
+if (isset($_GET['submit'])) {
 	$search_for = $_GET['search_for'];
 	$doctors = search_doctors($search_for);
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -37,8 +36,8 @@ if (isset($_GET['search_for'])) {
 <body>
 	<div class="menu">
 		<div class="doctor-profile">
-			<img src="../images/pic-1.png" alt="Doctor Image">
-			<h2><?php foreach ($patients as $patient) : ?>
+		<h2><?php foreach ($patients as $patient) : ?>
+			<img <?= $patient['image'] ?> alt="Doctor Image">
 					<h2><?= $patient['name'] ?></h2>
 				<?php endforeach; ?>
 			</h2>
@@ -52,7 +51,7 @@ if (isset($_GET['search_for'])) {
 		</ul>
 	</div>
 	<div class="main-section">
-		<h1>Welcome to <a href="../index.html" class="logo">TELE<span>Carely.</span></a>
+		<h1>Welcome to <a href="../index.php" class="logo">TELE<span>Carely.</span></a>
 			<div class="center-container">
 				<h3>Welcome!</h3>
 				<h1>
@@ -62,12 +61,12 @@ if (isset($_GET['search_for'])) {
 				</h1>
 				<h3>Channel a Doctor Here</h3>
 				<form class="search-form" action="patient_Index.php" method="get">
-					<input type="search" name="search_for" class="input-text" placeholder="Search Doctor and We will Find The Session Available">
-					<input type="Submit" value="Search" class="btn-primary btn">
+					<input style="margin-bottom: 15px;" type="search" name="search_for" class="input-text" placeholder="Search Doctor">
+					<input type="Submit" name="submit" id="submit" value="Search" class="btn-primary btn">
 				</form>
 				<table>
 					<?php foreach ($doctors as $doctor) : ?>
-						<tr><?= $doctor['name'] ?></tr>
+						<tr><?= $doctor['name'] ?></tr> <br>
 					<?php endforeach ?>
 				</table>
 			</div>
@@ -90,8 +89,8 @@ if (isset($_GET['search_for'])) {
 				<div class="dashboard-item-label">All Patients</div>
 			</div>
 			<div class="dashboard-item">
-				<div class="dashboard-item-number">0</div>
-				<div class="dashboard-item-label">All Nurse</div>
+				<div class="dashboard-item-number"><?php echo $last_nurse['num_nurses'] ?></div>
+				<div class="dashboard-item-label">All Nurses</div>
 			</div>
 			<div class="dashboard-item">
 				<div class="dashboard-item-number">0</div>

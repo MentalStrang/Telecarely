@@ -4,8 +4,8 @@
 // if (isset($_SESSION['user_id'])) {
 //     header('location: patient/patient_index.php');
 //     exit();
-// }
-
+//}
+include_once __DIR__.'/navbar.php';
 ?>
 
 
@@ -38,34 +38,7 @@
     <!-- ************************************ -->
 
 
-    <header class="header fixed-top">
 
-        <div class="container">
-
-            <div class="row align-items-center justify-content-between">
-                <!-- <img src="images/telecarely.png" alt=""> -->
-
-                <a href="#home" class="logo">TELE<span>Carely.</span></a>
-
-                <nav class="nav">
-                    <a href="#home">home</a>
-                    <a href="#about">about</a>
-                    <a href="#reviews">reviews</a>
-                    <!-- <a href="#contact">contact</a> -->
-                </nav>
-
-                <a style=" margin-right: -230px;font-size: 1.7rem; color: var(--blue);" href="login.php">Login</a>
-                <a style=" font-size: 1.7rem; color: var(--blue);" href="signup.php">Sing Up</a>
-
-
-
-                <div id="menu-btn" class="fas fa-bars"></div>
-
-            </div>
-
-        </div>
-
-    </header>
     <!-- ************************************ -->
     <!-- end header section -->
     <!-- ************************************ -->
@@ -118,7 +91,11 @@
                 <div class="col-md-6 content">
                     <span>about us</span>
                     <h3>True Healthcare For Your Family</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam cupiditate vero in provident ducimus. Totam quas labore mollitia cum nisi, sint, expedita rem error ipsa, nesciunt ab provident. Aperiam, officiis!</p>
+                    <p>We believe in providing comprehensive and 
+                        compassionate healthcare services to you and your loved ones. 
+                        Our team of experienced healthcare professionals is dedicated 
+                        to ensuring that you receive the highest quality care in a warm 
+                        and welcoming environment.</p>
                     <a href="signup.php" class="link-btn">Start your examination now</a>
                 </div>
 
@@ -146,19 +123,19 @@
             <div class="box">
                 <img src="images/process-1.png" alt="">
                 <h3>Check From your Phone</h3>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maxime, excepturi?</p>
+                <p>Use the website easly from your phone</p>
             </div>
 
             <div class="box">
                 <img src="images/process-2.png" alt="">
                 <h3>Check From your PC</h3>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maxime, excepturi?</p>
+                <p>Check the website easly from your Personal Computer</p>
             </div>
 
             <div class="box">
                 <img src="images/process-3.png" alt="">
                 <h3>Show your prescription</h3>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maxime, excepturi?</p>
+                <p>Open your prescription sent from the doctor</p>
             </div>
 
         </div>
@@ -183,7 +160,8 @@
 
             <div class="box">
                 <img src="images/pic-1.png" alt="">
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos, iure? Nemo est aspernatur voluptatum id, laboriosam asperiores iure omnis alias?</p>
+                <p>The online consultation service offered by this website was truly 
+                exceptional. From start to finish, the process was seamless and user-friendly.</p>
                 <div class="stars">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -197,7 +175,7 @@
 
             <div class="box">
                 <img src="images/pic-2.png" alt="">
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos, iure? Nemo est aspernatur voluptatum id, laboriosam asperiores iure omnis alias?</p>
+                <p>It's a great website for communicating with doctors with different specialtiy</p>
                 <div class="stars">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -205,13 +183,14 @@
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star-half-alt"></i>
                 </div>
-                <h3>Mohamed Ramadan</h3>
+                <h3>Matilda</h3>
                 <span>satisfied client</span>
             </div>
 
             <div class="box">
                 <img src="images/pic-3.png" alt="">
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos, iure? Nemo est aspernatur voluptatum id, laboriosam asperiores iure omnis alias?</p>
+                <p>The website is easy to navigate and the online consultation
+                    is straightforward. The doctor who conducted the consultation is professional.</p>
                 <div class="stars">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>

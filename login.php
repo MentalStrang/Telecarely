@@ -7,10 +7,30 @@ require __DIR__ . "/database/connection.php";
 require_once __DIR__ . "/database/connection_users.php";
 
 
+
+// session_start();
+// // to prevent user to back to the login page if he is login
+// if (isset($_SESSION['user_id'])) {
+//     header('location: patient/patient_index.php');
+//     exit();
+// }
+
+
 session_start();
 // to prevent user to back to the login page if he is login
 if (isset($_SESSION['user_id'])) {
-    header('location: patient/patient_index.php');
+    // Check the user's role
+    $user_id = $_SESSION['user_id'];
+    $user_role = get_user_role($user_id); // Replace this with your own function to get the user's role
+    if ($user_role === 'doctor') {
+        header('location: doctors/doctor_index.php');
+    } elseif ($user_role === 'patient') {
+        header('location: patient/patient_Index.php');
+    } else {
+        // Handle the case where the user's role is unknown
+        // For example, you could redirect them to an error page or log them out
+        // header('location: login.php');
+    }
     exit();
 }
 
@@ -19,31 +39,39 @@ if (isset($_POST["submit"])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-
-    if ($stmt = $connection->prepare('SELECT `id`, `password` FROM `users` WHERE `email` = ?')) {
+    if ($stmt = $connection->prepare('SELECT `id`, `password`, `role` FROM `users` WHERE `email` = ?')) {
         // Pass email to the query
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $stmt->store_result();
         // Check if the query returned any rows
         if ($stmt->num_rows > 0) {
-            // Bind the password returned from the database to the $hashed_password variable
-            $stmt->bind_result($id, $hashed_password);
+            // Bind the password and role returned from the database to variables
+            $stmt->bind_result($id, $hashed_password, $role);
             $stmt->fetch();
             // Verify the password entered by the user matches the hashed password from the database
             if (password_verify($password, $hashed_password)) {
                 // Password is correct, set session variables and redirect the user to the dashboard
                 $_SESSION['user_id'] = $id;
-                // Redirect the user to the dashboard
-                header('Location: patient/patient_Index.php');
+                $_SESSION['user_role'] = $role;
+                // Redirect the user to the appropriate dashboard
+                if ($role === 'doctor') {
+                    header('location: doctors/doctor_index.php');
+                } elseif ($role === 'patient') {
+                    header('location: patient/patient_Index.php');
+                } else {
+                    // Handle the case where the user's role is unknown
+                    // For example, you could redirect them to an error page or log them out
+                    // header('location: login.php');
+                }
                 exit();
             } else {
                 // Password is incorrect
-                $error_password = 'The password you have entered is incorrect.';
+                $error= 'The password you have entered is incorrect.';
             }
         } else {
             // User does not exist in the database
-            $error_email = 'The email address you have entered does not exist in our records.';
+            $error = 'The email address you have entered does not exist in our records.';
         }
         $stmt->close();
     }
@@ -54,6 +82,20 @@ if (isset($_POST["submit"])) {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 * Check if email is valid or not.

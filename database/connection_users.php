@@ -21,11 +21,35 @@ function database_get_count_doctor()
 	return $last_doctor;
 }
 
+// get the count of nurses 
+function database_get_count_nurse()
+{
+	$connection = database_connection();
+	$quiery = "SELECT COUNT(*) AS num_nurses FROM users WHERE role = 'nurse'";
+	$resutl = mysqli_query($connection, $quiery);
+	$last_nurse = mysqli_fetch_assoc($resutl);
+	return $last_nurse;
+}
+
+
+function get_user_role($user_id) {
+	$connection = database_connection();
+    $stmt = mysqli_prepare($connection, "select role from users where id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $user_id);
+	mysqli_stmt_execute($stmt);
+	$result = mysqli_stmt_get_result($stmt);
+	$role = mysqli_fetch_assoc($result);
+	mysqli_stmt_close($stmt);
+	mysqli_close($connection);
+    return $role;
+}
+
 function search_doctors($search_for)
 {
 	$connection = database_connection();
 	$stmt = mysqli_prepare($connection, "select * from users where name like ? 
 	and role like 'doctor'");
+	$search_for = '%'. $search_for. '%';
 	mysqli_stmt_bind_param($stmt, 's', $search_for);
 	mysqli_stmt_execute($stmt);
 	$result = mysqli_stmt_get_result($stmt);
@@ -72,6 +96,12 @@ function database_register_user($name, $email, $password, $user_role, $age, $pho
 		return 'The email address you have entered is invalid. Please enter a valid email address and try again.';
 	}
 
+	//check if the password matches the confirmation password
+	if ($_POST['password']!== $_POST['confirm-password']) {
+		// Passwords do not match
+		return "The password does not match confirmation password!";
+	}
+
 	// Make user role lowercase, eg. PATIENT -> patient
 	$user_role = strtolower($user_role);
 
@@ -107,7 +137,7 @@ function database_register_user($name, $email, $password, $user_role, $age, $pho
 				// Apply a hash function to the passwords so that in the event of a data breach, the passwords are not exposed in plain text.
 				$password = password_hash($password, PASSWORD_DEFAULT);
 				$stmt->bind_param(
-					'ssssiiis',
+					'ssssiiss',
 					$name,
 					$email,
 					$password,

@@ -3,6 +3,7 @@
 require __DIR__ . "/../database/connection_users.php";
 $last_patient = database_get_count_patient();
 $last_doctor = database_get_count_doctor();
+$last_nurse = database_get_count_nurse();
 
 session_start();
 // this code for sessions
@@ -44,19 +45,19 @@ if (isset($_SESSION['user_id'])) {
 		</ul>
 	</div>
 	<div class="main-section">
-		<h1>Welcome to <a href="../index.html" class="logo">TELE<span>Carely.</span></a>
+		<h1>Welcome to <a href="../index.php" class="logo">TELE<span>Carely.</span></a>
 			<div class="center-container">
 				<h3>Welcome!</h3>
 				<h1>
 					<h2><?php foreach ($doctors as $doctor) : ?>
-							<h2><?= $doctor['name'] ?></h2>
+							<h2> Dr. <?= $doctor['name'] ?></h2>
 						<?php endforeach; ?>
 				</h1>
-				<h3>Channel a Doctor Here</h3>
+				<!-- <h3>Channel a Doctor Here</h3>
 				<form class="search-form">
 					<input type="search" name="search" class="input-text" placeholder="Search Doctor and We will Find The Session Available">
 					<input type="Submit" value="Search" class="btn-primary btn">
-				</form>
+				</form> -->
 			</div>
 	</div>
 
@@ -77,7 +78,7 @@ if (isset($_SESSION['user_id'])) {
 				<div class="dashboard-item-label">All Patients</div>
 			</div>
 			<div class="dashboard-item">
-				<div class="dashboard-item-number">0</div>
+				<div class="dashboard-item-number"><?php echo $last_nurse['num_nurses'] ?></div>
 				<div class="dashboard-item-label">All Nurse</div>
 			</div>
 			<div class="dashboard-item">
