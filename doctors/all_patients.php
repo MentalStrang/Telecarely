@@ -41,7 +41,7 @@ $patinet_inquiry = database_get_all_patient_inquiries($doctort_id);
 	<div class="menu">
 		<div class="doctor-profile">
 			<img src="../images/pic-1.png" alt="Doctor Image">
-			<h2><?php foreach ($doctors as $doctor) : ?>
+			<h2> <?php foreach ($doctors as $doctor) : ?>
 					<h2> Dr. <?= $doctor['name'] ?></h2>
 				<?php endforeach; ?>
 			</h2>
