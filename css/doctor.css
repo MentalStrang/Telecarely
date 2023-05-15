@@ -115,3 +115,6 @@ background-color: transparent;
 background-color: var(--blue);
 }
 
+.img{
+    width: 150px;
+}

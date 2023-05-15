@@ -107,7 +107,7 @@ function database_register_user($name, $email, $password, $user_role, $age, $pho
 				// Apply a hash function to the passwords so that in the event of a data breach, the passwords are not exposed in plain text.
 				$password = password_hash($password, PASSWORD_DEFAULT);
 				$stmt->bind_param(
-					'ssssiiis',
+					'ssssiiss',
 					$name,
 					$email,
 					$password,

@@ -23,3 +23,12 @@ your requirements
 5- the nurse section should be increment when the home page of the doctor and nurse 
 6- make a dynamic nav bar
 7- validation in the signup if the passwor match with the confirmation password 
+
+
+
+
+about me 
+1-if the user change the role in html using aspect it store in database "it's a secure error check it again"; 
+
+procedrul style 
+object style 

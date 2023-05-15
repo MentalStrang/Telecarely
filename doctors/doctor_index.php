@@ -30,12 +30,12 @@ if (isset($_SESSION['user_id'])) {
 <body>
 	<div class="menu">
 		<div class="doctor-profile">
-			<img src="../images/pic-1.png" alt="Doctor Image">
-			<h2><?php foreach ($doctors as $doctor) : ?>
-					<h2><?= $doctor['name'] ?></h2>
-				<?php endforeach; ?>
-			</h2>
+			<?php foreach ($doctors as $doctor) : ?>
+				<img src="<?= $doctor['image'] ?>" alt="Doctor Image">
+				<h2><?= $doctor['name'] ?></h2>
+			<?php endforeach; ?>
 		</div>
+
 		<ul>
 			<li><a href="doctor_index.php">Home</a></li>
 			<li><a href="all_patients.php">My Patients</a></li>

@@ -233,31 +233,6 @@
 
 
 
-    <!-- ************************************ -->
-    <!-- start examination section -->
-    <!-- ************************************ -->
-
-    <!-- <section class="contact" id="contact">
-
-    <h1 class="heading">make appointment</h1>
-
-    <form>
-        <span>your name :</span>
-        <input type="text" name="name" placeholder="enter your name" class="box" required>
-        <span>your email :</span>
-        <input type="email" name="email" placeholder="enter your email" class="box" required>
-        <span>your number :</span>
-        <input type="number" name="number" placeholder="enter your number" class="box" required>
-        <span>appointment date :</span>
-        <input type="datetime-local" name="date" class="box" required>
-        <input type="submit" value="make appointment" name="submit" class="link-btn">
-    </form>  
-
-</section> -->
-
-    <!-- ************************************ -->
-    <!-- end examination section -->
-    <!-- ************************************ -->
 
     <!-- ************************************ -->
     <!-- start footer section -->

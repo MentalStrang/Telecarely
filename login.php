@@ -5,8 +5,6 @@ $error = "";
 // required pages
 require __DIR__ . "/database/connection.php";
 require_once __DIR__ . "/database/connection_users.php";
-
-
 session_start();
 // to prevent user to back to the login page if he is login
 if (isset($_SESSION['user_id'])) {
