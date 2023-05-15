@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . "/../database/patient_inquiry.php";
 require __DIR__ . "/../database/connection_users.php";
+
 session_start();
 // Initialize session and check if user is logged in
 
@@ -30,11 +31,12 @@ if (isset($_SESSION['user_id'])) {
     <h1 style="text-align:center; margin-bottom: 70px;margin-top: 50px;">Your Prescriptions</h1>
     <div class="menu">
         <div class="doctor-profile">
-            <img src="../images/pic-1.png" alt="Doctor Image">
-            <h2><?php foreach ($patients as $patient) : ?>
-                    <h2 style="color:white" ;><?= $patient['name'] ?></h2>
-                <?php endforeach; ?>
-            </h2>
+            <?php foreach ($patients as $patient) : ?>
+                <img src="<?= $patient['image'] ?> " alt="Doctor Image">
+                <h2>
+                    <h2><?= $patient['name'] ?></h2>
+                </h2>
+            <?php endforeach; ?>
         </div>
         <ul>
             <li><a href="../patient/patient_Index.php">Home</a></li>

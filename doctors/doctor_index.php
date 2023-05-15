@@ -33,7 +33,7 @@ if (isset($_SESSION['user_id'])) {
 		<div class="doctor-profile">
 			<?php foreach ($doctors as $doctor) : ?>
 				<img src="<?= $doctor['image'] ?>" alt="Doctor Image">
-				<h2><?= $doctor['name'] ?></h2>
+				<h2>DR. <?= $doctor['name'] ?></h2>
 			<?php endforeach; ?>
 		</div>
 
