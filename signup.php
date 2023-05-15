@@ -2,9 +2,9 @@
 require __DIR__ . "/database/connection.php";
 require __DIR__ . "/database/connection_users.php";
 
-
+// redirect if the patient/doctor  login 
 session_start();
-// to prevent user to back to the signup page if he is login
+// to prevent user to back to the sign page if he is login
 if (isset($_SESSION['user_id'])) {
 	header('location: patient/patient_index.php');
 	exit();
@@ -18,16 +18,17 @@ $error = ''; // Initialize error variable with an empty string
 $result = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	$error = database_register_user(
-		$_POST['name'],
-		$_POST['email'],
-		$_POST['password'],
-		$_POST['user-role'],
-		$_POST['age'],
-		$_POST['phone'],
-		$_POST['profile_pic'],
-		$_POST['specialty']
-	);
+	$name =
+		$error = database_register_user(
+			$_POST['name'],
+			$_POST['email'],
+			$_POST['password'],
+			$_POST['user-role'],
+			$_POST['age'],
+			$_POST['phone'],
+			$_POST['profile_pic'],
+			$_POST['specialty']
+		);
 	if ($error === '') {
 		// redirect after successful signup
 		header('Location: login.php');

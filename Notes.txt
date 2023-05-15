@@ -19,7 +19,23 @@ your requirements
 1- after login redirect to the patient page if the user is patient or doctor page if the user is doctor 
 2- search par should be working ((((done))))
 3- photo should change (hint : the key for solution is the sessions and check the datatype of the image in the database it can be fault)
+<<<<<<< HEAD
 4- login (should show an error message if the the email or password is incorrect) ((((done))))
 5- the nurse section should be increment when the home page of the doctor and nurse ((((done))))
 6- make a dynamic nav bar ((((done))))
 7- validation in the signup if the Password match with the confirmation password ((((done))))
+=======
+4- login (should show an error message if the the email or password is incorrect)
+5- the nurse section should be increment when the home page of the doctor and nurse 
+6- make a dynamic nav bar
+7- validation in the signup if the passwor match with the confirmation password 
+
+
+
+
+about me 
+1-if the user change the role in html using aspect it store in database "it's a secure error check it again"; 
+
+procedrul style 
+object style 
+>>>>>>> 4f2015a123f51aaeebdab9fbda58ff9c805623e5
