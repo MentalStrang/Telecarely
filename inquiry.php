@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
 	} else {
 		database_insert_inquiry($user_id, $doctor_id, $patient_message);
 		// add confirmation message or redirect to a different page
-		// header("Location: inquiry_confirmation.php");
+		// header("Loca                                                                                                                                                                                                                                                                                                                                                             tion: inquiry_confirmation.php");
 		exit();
 	}
 }

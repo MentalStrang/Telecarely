@@ -82,8 +82,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 			<label for="profile_pic">Profile Picture</label>
 			<input type="file" id="profile_pic" name="profile_pic" accept="image/*" required>
-			<?php if ($error !== "") : ?>
-				<p style="color: red; margin-top:-12px"> <?= $error ?> </p>
+						<?php if ($error == "Your registration has been completed successfully. You may now proceed to login.") : ?>
+				<p style="color: green; margin-top:-12px"> <?= $error?> </p>
+			<?php else: ?>
+				<p style="color: red; margin-top:-12px"> <?= $error?> </p>
 			<?php endif; ?>
 			<button type="submit" name="signup">Sign Up</button>
 			<button type="reset">Reset</button>
