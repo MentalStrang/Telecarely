@@ -30,16 +30,17 @@ if (isset($_SESSION['user_id'])) {
 <body>
 	<div class="menu">
 		<div class="doctor-profile">
-			<img src="../images/pic-1.png" alt="Doctor Image">
-			<h2><?php foreach ($patients as $patient) : ?>
+			<?php foreach ($patients as $patient) : ?>
+				<img src="<?= $patient['image'] ?> " alt="Doctor Image">
+				<h2>
 					<h2><?= $patient['name'] ?></h2>
-				<?php endforeach; ?>
-			</h2>
+				</h2>
+			<?php endforeach; ?>
 		</div>
 		<ul>
 			<li><a href="patient_index.php">Home</a></li>
 			<li><a href="all_doctors.php">All Doctors</a></li>
-			<li><a href="../prescription/pre_index.html">Your Prescriptions</a></li>
+			<li><a href="pre_index.php">Your Prescriptions</a></li>
 			<li><a href="../logout.php">logout</a></li>
 		</ul>
 	</div>
@@ -57,7 +58,7 @@ if (isset($_SESSION['user_id'])) {
 			<?php foreach ($doctors as $doctor) : ?>
 				<a href="cardiology.html">
 					<tr>
-						<td><?php echo $doctor['name'] ?></td>
+						<td>DR. <?php echo $doctor['name'] ?></td>
 						<td><?php echo $doctor['specialty'] ?></td>
 						<td>Email: <?php echo $doctor['email'] ?><br>Phone: <?php echo $doctor['phone'] ?></td>
 

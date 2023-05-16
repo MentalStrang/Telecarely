@@ -36,8 +36,8 @@ if (isset($_GET['submit'])) {
 <body>
 	<div class="menu">
 		<div class="doctor-profile">
-		<h2><?php foreach ($patients as $patient) : ?>
-			<img <?= $patient['image'] ?> alt="Doctor Image">
+			<h2><?php foreach ($patients as $patient) : ?>
+					<img <?= $patient['image'] ?> alt="Doctor Image">
 					<h2><?= $patient['name'] ?></h2>
 				<?php endforeach; ?>
 			</h2>

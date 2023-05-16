@@ -1,6 +1,7 @@
 <?php
 // variables used 
 $error = "";
+$email = "";
 
 // required pages
 require __DIR__ . "/database/connection.php";
@@ -12,15 +13,13 @@ session_start();
 if (isset($_SESSION['user_id'])) {
     // Check the user's role
     $user_id = $_SESSION['user_id'];
-    $user_role = get_user_role($user_id); // Replace this with your own function to get the user's role
+    $user_role = get_user_role($user_id);
     if ($user_role === 'doctor') {
         header('location: doctors/doctor_index.php');
     } elseif ($user_role === 'patient') {
         header('location: patient/patient_Index.php');
     } else {
-        // Handle the case where the user's role is unknown
-        // For example, you could redirect them to an error page or log them out
-        // header('location: login.php');
+        header('location: login.php');
     }
     exit();
 }
@@ -58,7 +57,7 @@ if (isset($_POST["submit"])) {
                 exit();
             } else {
                 // Password is incorrect
-                $error= 'The password you have entered is incorrect.';
+                $error = 'The password you have entered is incorrect.';
             }
         } else {
             // User does not exist in the database
@@ -74,32 +73,18 @@ if (isset($_POST["submit"])) {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 * Check if email is valid or not.
 * eg. hellothere is not a valid email
 * eg. hellothere@gmail.com is a valid one
 */
-// if ($_SERVER['REQUEST_METHOD'] == "POST") {
-//     if (filter_var($_POST["email"])) {
-//         $RequiredMail = "De email dient ingevult te worden";
-//     } else {
-//         exit('The email address you have entered is invalid. Please enter a valid email address and try again.');
-//     }
-// }
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (filter_var($_POST["email"])) {
+        $RequiredMail = "De email dient ingevult te worden";
+    } else {
+        exit('The email address you have entered is invalid. Please enter a valid email address and try again.');
+    }
+}
 
 
 ?>
@@ -117,7 +102,7 @@ if (isset($_POST["submit"])) {
         <h1>Login</h1>
         <form method="post" action="login.php">
             <label for="email">Email</label>
-            <input type="text" id="email" name="email" required />
+            <input type="text" id="email" name="email" value="<?php if (isset($_POST['submit'])) : ?><?= $_POST['email'] ?><?php endif; ?>" required />
 
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required />
