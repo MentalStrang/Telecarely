@@ -8,14 +8,12 @@ $last_nurse = database_get_count_nurse();
 session_start();
 // this code for sessions
 
-if (isset($_SESSION['user_id'])) {
-	$user_id = $_SESSION['user_id'];
-	$doctors = database_get_user($user_id);
-} else {
-	// redirect to the login page if user made logout
+if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'doctor') {
 	header('location: ../login.php');
+	exit();
 }
-
+$user_id = $_SESSION['user_id'];
+$doctors = database_get_user($user_id);
 
 ?>
 
@@ -80,10 +78,6 @@ if (isset($_SESSION['user_id'])) {
 			<div class="dashboard-item">
 				<div class="dashboard-item-number"><?php echo $last_nurse['num_nurses'] ?></div>
 				<div class="dashboard-item-label">All Nurse</div>
-			</div>
-			<div class="dashboard-item">
-				<div class="dashboard-item-number">0</div>
-				<div class="dashboard-item-label">Today Sessions</div>
 			</div>
 		</div>
 	</div>

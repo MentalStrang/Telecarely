@@ -2,17 +2,15 @@
 session_start();
 require __DIR__ . "/../database/connection_all_doctors.php";
 require __DIR__ . "/../database/connection_users.php";
+
 $doctors = database_get_doctors();
-if (isset($_SESSION['user_id'])) {
-	$user_id = $_SESSION['user_id'];
-	$patients = database_get_user($user_id);
-} else {
-	// redirect to the login page if user made logout
+if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'patient') {
 	header('location: ../login.php');
+	exit();
 }
 // print_r($doctors);
 // exit();
-
+$patients = database_get_user($_SESSION['user_id']);
 ?>
 
 
@@ -31,7 +29,7 @@ if (isset($_SESSION['user_id'])) {
 	<div class="menu">
 		<div class="doctor-profile">
 			<?php foreach ($patients as $patient) : ?>
-				<img src="<?= $patient['image'] ?> " alt="Doctor Image">
+				<img src="<?= $patient['image'] ?> " alt="patient page">
 				<h2>
 					<h2><?= $patient['name'] ?></h2>
 				</h2>

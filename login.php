@@ -14,9 +14,9 @@ if (isset($_SESSION['user_id'])) {
     // Check the user's role
     $user_id = $_SESSION['user_id'];
     $user_role = get_user_role($user_id);
-    if ($user_role === 'doctor') {
+    if ($user_role['role'] === 'doctor') {
         header('location: doctors/doctor_index.php');
-    } elseif ($user_role === 'patient') {
+    } elseif ($user_role['role'] === 'patient') {
         header('location: patient/patient_Index.php');
     } else {
         header('location: login.php');

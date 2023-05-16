@@ -6,15 +6,15 @@ require __DIR__ . "/../database/connection_all_doctors.php";
 session_start();
 // Initialize session and check if user is logged in
 
-if (isset($_SESSION['user_id'])) {
-    $user_id = $_SESSION['user_id'];
-    $patients = database_get_user($user_id);
-    $prescriptions = database_get_prescription($user_id);
-    // print_r($prescriptions);
-} else {
-    // redirect to the login page if user made logout
+if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'patient') {
     header('location: ../login.php');
+    exit();
 }
+
+$user_id = $_SESSION['user_id'];
+$patients = database_get_user($user_id);
+$prescriptions = database_get_prescription($user_id);
+
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +33,7 @@ if (isset($_SESSION['user_id'])) {
     <div class="menu">
         <div class="doctor-profile">
             <?php foreach ($patients as $patient) : ?>
-                <img src="<?= $patient['image'] ?> " alt="Doctor Image">
+                <img src="<?= $patient['image'] ?> " alt="patient page">
                 <h2>
                     <h2><?= $patient['name'] ?></h2>
                 </h2>

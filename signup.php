@@ -6,7 +6,16 @@ require __DIR__ . "/database/connection_users.php";
 session_start();
 // to prevent user to back to the sign page if he is login
 if (isset($_SESSION['user_id'])) {
-	header('location: patient/patient_index.php');
+	// Check the user's role
+	$user_id = $_SESSION['user_id'];
+	$user_role = get_user_role($user_id);
+	if ($user_role['role'] == 'doctor') {
+		header('location: doctors/doctor_index.php');
+	} elseif ($user_role['role'] == 'patient') {
+		header('location: patient/patient_Index.php');
+	} else {
+		header('location: login.php');
+	}
 	exit();
 }
 
@@ -82,10 +91,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 			<label for="profile_pic">Profile Picture</label>
 			<input type="file" id="profile_pic" name="profile_pic" accept="image/*" required>
-						<?php if ($error == "Your registration has been completed successfully. You may now proceed to login.") : ?>
-				<p style="color: green; margin-top:-12px"> <?= $error?> </p>
-			<?php else: ?>
-				<p style="color: red; margin-top:-12px"> <?= $error?> </p>
+			<?php if ($error == "Your registration has been completed successfully. You may now proceed to login.") : ?>
+				<p style="color: green; margin-top:-12px"> <?= $error ?> </p>
+			<?php else : ?>
+				<p style="color: red; margin-top:-12px"> <?= $error ?> </p>
 			<?php endif; ?>
 			<button type="submit" name="signup">Sign Up</button>
 			<button type="reset">Reset</button>

@@ -7,15 +7,14 @@ $last_nurse = database_get_count_nurse();
 session_start();
 // this code for sessions
 
-if (isset($_SESSION['user_id'])) {
-	$user_id = $_SESSION['user_id'];
-	$patients = database_get_user($user_id);
-} else {
-	// redirect to the login page if user made logout
+// Check if the user is logged in
+if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'patient') {
 	header('location: ../login.php');
+	exit();
 }
 
-
+$user_id = $_SESSION['user_id'];
+$patients = database_get_user($user_id);
 
 $doctors = array();
 if (isset($_GET['submit'])) {
@@ -63,12 +62,18 @@ if (isset($_GET['submit'])) {
 					<input style="margin-bottom: 15px;" type="search" name="search_for" class="input-text" placeholder="Search Doctor">
 					<input type="Submit" name="submit" id="submit" value="Search" class="btn-primary btn">
 				</form>
-				<table>
-					<?php foreach ($doctors as $doctor) : ?>
-						<tr><?= $doctor['name'] ?></tr> <br>
-					<?php endforeach ?>
-				</table>
+				<?php if (count($doctors) > 0) : ?>
+					<table>
+						<?php foreach ($doctors as $doctor) : ?>
+							<tr><?= $doctor['name'] ?></tr> <br>
+						<?php endforeach ?>
+					</table>
+				<?php else : ?>
+					<p id="no-doctors-found">Sorry, no doctors found.</p>
+				<?php endif; ?>
 			</div>
+
+
 	</div>
 
 	<!-- ********************************* -->
@@ -90,10 +95,6 @@ if (isset($_GET['submit'])) {
 			<div class="dashboard-item">
 				<div class="dashboard-item-number"><?php echo $last_nurse['num_nurses'] ?></div>
 				<div class="dashboard-item-label">All Nurses</div>
-			</div>
-			<div class="dashboard-item">
-				<div class="dashboard-item-number">0</div>
-				<div class="dashboard-item-label">Today Sessions</div>
 			</div>
 		</div>
 	</div>

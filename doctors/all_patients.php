@@ -6,16 +6,17 @@ require __DIR__ . "/../database/connection_users.php";
 session_start();
 // this code for sessions
 
-if (isset($_SESSION['user_id'])) {
-	$doctort_id = $_SESSION['user_id'];
-	$doctors = database_get_user($doctort_id);
-} else {
-	// redirect to the login page if user made logout
+// this code for sessions
+
+if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'doctor') {
 	header('location: ../login.php');
+	exit();
 }
+$doctor_id = $_SESSION['user_id'];
+$doctors = database_get_user($doctor_id);
 
 
-$patinet_inquiry = database_get_all_patient_inquiries($doctort_id);
+$patinet_inquiry = database_get_all_patient_inquiries($doctor_id);
 // exit();
 
 // $patinet_name = database_get_name_patietn_from_inquiry($patinet_inquiry['patient_id']);

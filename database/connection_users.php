@@ -103,10 +103,10 @@ function database_register_user($name, $email, $password, $user_role, $age, $pho
 		return "The password does not match confirmation password!";
 	}
 
-	if (strlen($phone)!=10){
-		return 'Please inter valid mobile phone.';
+	if (preg_match('/^(?:\+20|0)?1[0125]\d{8}$/', $phone)) {
+	} else {
+		return "Invalid Phone Number";
 	}
-
 	// Make user role lowercase, eg. PATIENT -> patient
 	$user_role = strtolower($user_role);
 
@@ -156,7 +156,7 @@ function database_register_user($name, $email, $password, $user_role, $age, $pho
 				$stmt->execute();
 				$stmt->close();
 
-			  return 'Your registration has been completed successfully. You may now proceed to login.';
+				return 'Your registration has been completed successfully. You may now proceed to login.';
 			} else {
 				return 'We apologize for the inconvenience, but we were unable to prepare your statement at this time. Please try again later.';
 			}
