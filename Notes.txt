@@ -36,3 +36,9 @@ your requirements
 new requirments 
 1- when the doctor in the index page can go to the patient page using url " logical error " 
 2- it not make a redirect to the same page when user write the url login 
+
+
+
+things done 
+1- inquiry page. 
+2- 

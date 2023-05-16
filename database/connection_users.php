@@ -32,16 +32,17 @@ function database_get_count_nurse()
 }
 
 
-function get_user_role($user_id) {
+function get_user_role($user_id)
+{
 	$connection = database_connection();
-    $stmt = mysqli_prepare($connection, "select role from users where id = ?");
-    mysqli_stmt_bind_param($stmt, "i", $user_id);
+	$stmt = mysqli_prepare($connection, "select role from users where id = ?");
+	mysqli_stmt_bind_param($stmt, "i", $user_id);
 	mysqli_stmt_execute($stmt);
 	$result = mysqli_stmt_get_result($stmt);
 	$role = mysqli_fetch_assoc($result);
 	mysqli_stmt_close($stmt);
 	mysqli_close($connection);
-    return $role;
+	return $role;
 }
 
 function search_doctors($search_for)
@@ -49,7 +50,7 @@ function search_doctors($search_for)
 	$connection = database_connection();
 	$stmt = mysqli_prepare($connection, "select * from users where name like ? 
 	and role like 'doctor'");
-	$search_for = '%'. $search_for. '%';
+	$search_for = '%' . $search_for . '%';
 	mysqli_stmt_bind_param($stmt, 's', $search_for);
 	mysqli_stmt_execute($stmt);
 	$result = mysqli_stmt_get_result($stmt);
@@ -59,8 +60,8 @@ function search_doctors($search_for)
 	return $doctors;
 }
 
-// get users
-function database_get_all_user($id)
+// get only one  user using id which i select it from sessions
+function database_get_user($id)
 {
 	$connection = database_connection();
 	$stmt = mysqli_prepare($connection, "SELECT * FROM users WHERE `id` = ?");
@@ -97,7 +98,7 @@ function database_register_user($name, $email, $password, $user_role, $age, $pho
 	}
 
 	//check if the password matches the confirmation password
-	if ($_POST['password']!== $_POST['confirm-password']) {
+	if ($_POST['password'] !== $_POST['confirm-password']) {
 		// Passwords do not match
 		return "The password does not match confirmation password!";
 	}

@@ -1,13 +1,14 @@
 <?php
 require __DIR__ . "/../database/patient_inquiry.php";
 require __DIR__ . "/../database/connection_users.php";
+require __DIR__ . "/../database/connection_all_doctors.php";
 
 session_start();
 // Initialize session and check if user is logged in
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-    $patients = database_get_all_user($user_id);
+    $patients = database_get_user($user_id);
     $prescriptions = database_get_prescription($user_id);
     // print_r($prescriptions);
 } else {
@@ -49,11 +50,10 @@ if (isset($_SESSION['user_id'])) {
         <?php foreach ($prescriptions as $prescription) : ?>
             <section>
                 <h2>Prescription</h2>
-                <p><strong>Doctor:</strong> <?= $prescription['doctor_id'] ?></p>
+
+                <p><strong>Doctor:</strong> <?= get_doctor_name($prescription['doctor_id'])  ?></p>
                 <p><strong>Drug Name:</strong> <?= $prescription['drug_name'] ?> </p>
-                <ul>
-                    <li>Drug Amount: <?= $prescription["drug_amount"] ?> </li>
-                </ul>
+                <p><strong>Drug Amount:</strong> <?= $prescription["drug_amount"] ?> </p>
             </section>
         <?php endforeach; ?>
     </main>

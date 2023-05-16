@@ -1,8 +1,9 @@
 <?php
 session_start();
 require __DIR__ . "/database/patient_inquiry.php";
-
+// get user id from sessions
 $user_id = $_SESSION['user_id'];
+
 if (!isset($_GET['id'])) {
 	// handle error when id parameter is not set
 }
@@ -37,7 +38,7 @@ if (isset($_POST['submit'])) {
 	<div class="container">
 		<h1>Send Inquiry to Doctor</h1>
 		<?php if (!empty($errors)) { ?>
-			<div class="errors">
+			<div class="errors" style="color:red">
 				<?php foreach ($errors as $error) { ?>
 					<p><?php echo $error; ?></p>
 				<?php } ?>

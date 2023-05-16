@@ -10,7 +10,7 @@ session_start();
 
 if (isset($_SESSION['user_id'])) {
 	$user_id = $_SESSION['user_id'];
-	$doctors = database_get_all_user($user_id);
+	$doctors = database_get_user($user_id);
 } else {
 	// redirect to the login page if user made logout
 	header('location: ../login.php');

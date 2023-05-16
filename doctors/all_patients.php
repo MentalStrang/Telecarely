@@ -8,7 +8,7 @@ session_start();
 
 if (isset($_SESSION['user_id'])) {
 	$doctort_id = $_SESSION['user_id'];
-	$doctors = database_get_all_user($doctort_id);
+	$doctors = database_get_user($doctort_id);
 } else {
 	// redirect to the login page if user made logout
 	header('location: ../login.php');
@@ -40,11 +40,11 @@ $patinet_inquiry = database_get_all_patient_inquiries($doctort_id);
 <body>
 	<div class="menu">
 		<div class="doctor-profile">
-			<img src="../images/pic-1.png" alt="Doctor Image">
 			<h2> <?php foreach ($doctors as $doctor) : ?>
+					<img src="<?= $doctor['image'] ?>" alt="Doctor Image">
 					<h2> Dr. <?= $doctor['name'] ?></h2>
-				<?php endforeach; ?>
 			</h2>
+		<?php endforeach; ?>
 		</div>
 		<ul>
 			<li><a href="doctor_index.php">Home</a></li>

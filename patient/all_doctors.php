@@ -5,7 +5,7 @@ require __DIR__ . "/../database/connection_users.php";
 $doctors = database_get_doctors();
 if (isset($_SESSION['user_id'])) {
 	$user_id = $_SESSION['user_id'];
-	$patients = database_get_all_user($user_id);
+	$patients = database_get_user($user_id);
 } else {
 	// redirect to the login page if user made logout
 	header('location: ../login.php');

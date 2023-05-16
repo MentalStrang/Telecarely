@@ -9,15 +9,14 @@ session_start();
 
 if (isset($_SESSION['user_id'])) {
 	$user_id = $_SESSION['user_id'];
-	$patients = database_get_all_user($user_id);
+	$patients = database_get_user($user_id);
 } else {
 	// redirect to the login page if user made logout
 	header('location: ../login.php');
 }
 
 
-// for search tag " search for a doctor in the clinic using name
-// $search_for = '';
+
 $doctors = array();
 if (isset($_GET['submit'])) {
 	$search_for = $_GET['search_for'];
@@ -37,7 +36,7 @@ if (isset($_GET['submit'])) {
 	<div class="menu">
 		<div class="doctor-profile">
 			<h2><?php foreach ($patients as $patient) : ?>
-					<img <?= $patient['image'] ?> alt="Doctor Image">
+					<img src="<?= $patient['image'] ?>" alt="patient page">
 					<h2><?= $patient['name'] ?></h2>
 				<?php endforeach; ?>
 			</h2>
